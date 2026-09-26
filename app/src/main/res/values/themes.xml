@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        A base theme applied to the application. Used ONLY as the launch /
+        splash theme before the Compose surface takes over.  Compose handles
+        all in-app theming via SalaryBoxTheme.
+    -->
+    <style name="Theme.SalaryBox" parent="android:Theme.Material.NoTitleBar">
+        <!-- The window background colour shown during cold start -->
+        <item name="android:windowBackground">@android:color/black</item>
+        <!-- Edge-to-edge: draw behind the status bar -->
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>
