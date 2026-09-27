@@ -5,7 +5,7 @@
         splash theme before the Compose surface takes over.  Compose handles
         all in-app theming via SalaryBoxTheme.
     -->
-    <style name="Theme.SalaryBox" parent="android:Theme.Material.NoTitleBar">
+    <style name="Theme.SalaryBox" parent="android:Theme.Material.NoActionBar">
         <!-- The window background colour shown during cold start -->
         <item name="android:windowBackground">@android:color/black</item>
         <!-- Edge-to-edge: draw behind the status bar -->

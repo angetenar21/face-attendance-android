@@ -1,0 +1,8 @@
+com.salarybox.app-pngs-0 /Users/angetenar/Desktop/salary-box/app/build/generated/res/pngs/debug
+com.salarybox.app-updated_navigation_xml-1 /Users/angetenar/Desktop/salary-box/app/build/generated/updated_navigation_xml/debug
+com.salarybox.app-packageDebugResources-2 /Users/angetenar/Desktop/salary-box/app/build/intermediates/incremental/debug/packageDebugResources/merged.dir
+com.salarybox.app-packageDebugResources-3 /Users/angetenar/Desktop/salary-box/app/build/intermediates/incremental/debug/packageDebugResources/stripped.dir
+com.salarybox.app-debug-4 /Users/angetenar/Desktop/salary-box/app/build/intermediates/merged_res/debug/mergeDebugResources
+com.salarybox.app-debug-5 /Users/angetenar/Desktop/salary-box/app/src/debug/res
+com.salarybox.app-main-6 /Users/angetenar/Desktop/salary-box/app/src/main/res
+gradleHome-0 /Users/angetenar/.gradle

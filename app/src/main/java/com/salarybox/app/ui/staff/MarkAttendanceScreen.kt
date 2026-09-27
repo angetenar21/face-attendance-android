@@ -43,6 +43,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.tasks.await
 import java.io.File
 import kotlin.math.max
@@ -89,7 +90,8 @@ class MarkAttendanceViewModel(
                 val enrolledEmbedding = FaceMatcher.parseEmbedding(staff.faceEmbedding)
                 
                 // 1.5 Throttle check: Block if checked in within the last 60 seconds
-                val recentRecords = kotlinx.coroutines.flow.first(attendanceRepository.getAttendanceForStaff(staffId))
+                val recentRecordsFlow = attendanceRepository.getAttendanceForStaff(staffId)
+                val recentRecords = recentRecordsFlow.first()
                 val lastRecordTime = recentRecords.maxByOrNull { it.timestamp }?.timestamp ?: 0L
                 if (System.currentTimeMillis() - lastRecordTime < 60_000) {
                     _uiState.update { it.copy(isProcessing = false, error = "You just marked attendance! Please wait a minute before trying again.") }

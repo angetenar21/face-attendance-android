@@ -26,5 +26,11 @@ data class UserEntity(
     val password: String,
 
     /** ADMIN or STAFF — stored as a string via [com.salarybox.app.data.local.db.Converters]. */
-    val role: Role
+    val role: Role,
+
+    /**
+     * FK to [StaffEntity.id] — non-null only for STAFF role users.
+     * Links the login account to the staff record for face-verified attendance.
+     */
+    val staffId: Long? = null
 )

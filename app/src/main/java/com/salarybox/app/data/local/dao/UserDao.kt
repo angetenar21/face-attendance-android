@@ -40,4 +40,8 @@ interface UserDao {
     /** Return all users (admin only — management screen). */
     @Query("SELECT * FROM users ORDER BY username ASC")
     suspend fun getAllUsers(): List<UserEntity>
+
+    /** Update the staffId link after a staff record is created. */
+    @Query("UPDATE users SET staffId = :staffId WHERE username = :username")
+    suspend fun updateStaffId(username: String, staffId: Long)
 }

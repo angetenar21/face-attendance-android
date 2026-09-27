@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.salarybox.app.data.local.entity.StaffEntity
+import com.salarybox.app.data.model.Role
+import com.salarybox.app.data.repository.AuthRepository
 import com.salarybox.app.data.repository.StaffRepository
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -48,26 +50,20 @@ data class AddStaffUiState(
 /**
  * Shared ViewModel scoped to the admin nested nav-graph.
  *
- * Because both [StaffListScreen] and [AddStaffScreen] acquire this ViewModel
- * from the same backstack entry (the parent graph route), they share a single
- * instance.  This means:
- *  - The staff list Flow updates automatically the moment AddStaff saves.
- *  - The uniqueness check in AddStaff reads from the exact same repository.
- *  - Navigation events are modelled as a [Channel] (one-shot) so they are
- *    never re-delivered after a recomposition.
+ * Accepts both [staffRepository] and [authRepository] so that when a staff
+ * member is created, a linked login account is also automatically created.
+ *
+ * Staff login credentials:
+ *   - username  = employeeId  (e.g. "EMP-001")
+ *   - password  = "1234"      (default)
  */
-class StaffViewModel(private val staffRepository: StaffRepository) : ViewModel() {
+class StaffViewModel(
+    private val staffRepository: StaffRepository,
+    private val authRepository: AuthRepository
+) : ViewModel() {
 
     // --- Staff list --------------------------------------------------------
 
-    /**
-     * Transforms the repository Flow into a sealed [StaffListUiState].
-     *
-     * [SharingStarted.WhileSubscribed(5_000)] keeps the upstream alive for
-     * 5 s after the last collector leaves — avoids restarting the DB query
-     * on every configuration change while allowing clean-up after genuine
-     * navigation away.
-     */
     val staffListUiState: StateFlow<StaffListUiState> = staffRepository
         .getAllStaff()
         .map { list ->
@@ -85,11 +81,6 @@ class StaffViewModel(private val staffRepository: StaffRepository) : ViewModel()
     private val _addStaffState = MutableStateFlow(AddStaffUiState())
     val addStaffState: StateFlow<AddStaffUiState> = _addStaffState.asStateFlow()
 
-    /**
-     * One-shot navigation event: emitted once after a successful save.
-     * Using a [Channel] (capacity = 1) guarantees the event is delivered
-     * exactly once even if the collector briefly disappears during recomposition.
-     */
     private val _navigateBackEvent = Channel<Unit>(capacity = Channel.BUFFERED)
     val navigateBackEvent = _navigateBackEvent.receiveAsFlow()
 
@@ -102,17 +93,14 @@ class StaffViewModel(private val staffRepository: StaffRepository) : ViewModel()
     }
 
     /**
-     * Validates the form, checks uniqueness, and inserts the new staff member.
-     *
-     * On success: emits [navigateBackEvent].
-     * On failure: sets inline error messages on the relevant fields.
+     * Validates the form, inserts the staff record, and auto-creates a linked user account.
+     * The staff member can then log in with:  username=employeeId  password=1234
      */
     fun saveStaff() {
         val state = _addStaffState.value
         val name = state.name.trim()
         val employeeId = state.employeeId.trim()
 
-        // --- Synchronous validation ---
         var nameError: String? = null
         var employeeIdError: String? = null
 
@@ -126,7 +114,6 @@ class StaffViewModel(private val staffRepository: StaffRepository) : ViewModel()
             return
         }
 
-        // --- Async: uniqueness check + insert ---
         viewModelScope.launch {
             _addStaffState.update { it.copy(isSaving = true) }
 
@@ -141,9 +128,23 @@ class StaffViewModel(private val staffRepository: StaffRepository) : ViewModel()
                 return@launch
             }
 
-            staffRepository.addStaff(
+            // 1. Insert staff record; get the auto-generated staffId
+            val staffId = staffRepository.addStaff(
                 StaffEntity(name = name, employeeId = employeeId)
             )
+
+            // 2. Auto-create a linked user account (username = employeeId, password = "1234")
+            if (!authRepository.userExists(employeeId)) {
+                authRepository.createUser(
+                    username = employeeId,
+                    password = "1234",
+                    role = Role.STAFF,
+                    staffId = staffId
+                )
+            } else {
+                // User already existed — just link it to this staff record
+                authRepository.linkUserToStaff(employeeId, staffId)
+            }
 
             _addStaffState.update { it.copy(isSaving = false) }
             resetForm()
@@ -162,12 +163,13 @@ class StaffViewModel(private val staffRepository: StaffRepository) : ViewModel()
 // ---------------------------------------------------------------------------
 
 class StaffViewModelFactory(
-    private val staffRepository: StaffRepository
+    private val staffRepository: StaffRepository,
+    private val authRepository: AuthRepository
 ) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(StaffViewModel::class.java)) {
-            return StaffViewModel(staffRepository) as T
+            return StaffViewModel(staffRepository, authRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel: ${modelClass.name}")
     }

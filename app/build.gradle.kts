@@ -2,16 +2,17 @@ plugins {
     alias(libs.plugins.android.application)
     // kotlin.android and kotlin.plugin.compose are provided by AGP 9.0+ automatically
     alias(libs.plugins.ksp)
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
     namespace = "com.salarybox.app"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.salarybox.app"
         minSdk = 26
-        targetSdk = 36
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
 

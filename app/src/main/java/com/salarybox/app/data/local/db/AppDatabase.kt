@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.salarybox.app.data.local.dao.AttendanceDao
 import com.salarybox.app.data.local.dao.StaffDao
@@ -40,7 +41,7 @@ import kotlinx.coroutines.launch
         StaffEntity::class,
         AttendanceEntity::class,
     ],
-    version = 1,
+    version = 2,
     exportSchema = true
 )
 @TypeConverters(Converters::class)
@@ -66,11 +67,20 @@ abstract class AppDatabase : RoomDatabase() {
                 INSTANCE ?: buildDatabase(context.applicationContext).also { INSTANCE = it }
             }
 
+        /**
+         * Migration from v1 → v2: adds staffId column to users table.
+         * Uses NULL as default (existing admin/staff accounts have no linked staff record).
+         */
+        private val MIGRATION_1_2 = object : Migration(1, 2) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE users ADD COLUMN staffId INTEGER")
+            }
+        }
+
         private fun buildDatabase(context: Context): AppDatabase =
             Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
                 .addCallback(SeedCallback())
-                // Add migration objects here when the schema changes:
-                // .addMigrations(MIGRATION_1_2)
+                .addMigrations(MIGRATION_1_2)
                 .build()
     }
 
@@ -102,17 +112,14 @@ abstract class AppDatabase : RoomDatabase() {
             // Only seed if the table is empty (extra safety guard).
             if (userDao.getAllUsers().isNotEmpty()) return
 
+            // Seed a single admin user. Staff user accounts are created automatically
+            // when the admin registers a staff member in AddStaffScreen.
             userDao.insertAll(
                 listOf(
                     UserEntity(
                         username = "admin",
                         password = "admin123",   // plain text — prototype only
                         role = Role.ADMIN
-                    ),
-                    UserEntity(
-                        username = "staff",
-                        password = "staff123",   // plain text — prototype only
-                        role = Role.STAFF
                     )
                 )
             )

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- A simple checkmark icon for attendance/verification -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M 44.5 71.5 L 26.5 53.5 L 31.5 48.5 L 44.5 61.5 L 76.5 29.5 L 81.5 34.5 Z" />
+</vector>

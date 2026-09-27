@@ -34,10 +34,14 @@ class AuthRepository(private val userDao: UserDao) {
      * @return The auto-generated row ID of the inserted user.
      * @throws android.database.sqlite.SQLiteConstraintException if [username] is not unique.
      */
-    suspend fun createUser(username: String, password: String, role: Role): Long =
+    suspend fun createUser(username: String, password: String, role: Role, staffId: Long? = null): Long =
         userDao.insert(
-            UserEntity(username = username.trim(), password = password, role = role)
+            UserEntity(username = username.trim(), password = password, role = role, staffId = staffId)
         )
+
+    /** Updates the staffId link on an existing user account. */
+    suspend fun linkUserToStaff(username: String, staffId: Long) =
+        userDao.updateStaffId(username.trim(), staffId)
 
     /** Returns all users — for admin management screens only. */
     suspend fun getAllUsers(): List<UserEntity> = userDao.getAllUsers()
