@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.salarybox.app-mergeDebugResources-59:/values-en-rGB/values-en-rGB.xml",
+            "outputFile": "com.faceattend.app-mergeDebugResources-59:/values-en-rGB/values-en-rGB.xml",
             "map": [
                 {
                     "source": "/Users/angetenar/.gradle/caches/9.7.1/transforms/eba0c4a46c858d11af95ab3876aae544/transformed/foundation/res/values-en-rGB/values-en-rGB.xml",

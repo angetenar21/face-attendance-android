@@ -1,6 +1,6 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-3    package="com.salarybox.app"
+3    package="com.faceattend.app"
 4    android:versionCode="1"
 5    android:versionName="1.0" >
 6
@@ -33,12 +33,12 @@
 21
 22    <permission
 22-->[androidx.core:core:1.18.0] /Users/angetenar/.gradle/caches/9.7.1/transforms/4dec685ff254a31bc6d8a44d29e8c8b1/transformed/core-1.18.0/AndroidManifest.xml:22:5-24:47
-23        android:name="com.salarybox.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+23        android:name="com.faceattend.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
 23-->[androidx.core:core:1.18.0] /Users/angetenar/.gradle/caches/9.7.1/transforms/4dec685ff254a31bc6d8a44d29e8c8b1/transformed/core-1.18.0/AndroidManifest.xml:23:9-81
 24        android:protectionLevel="signature" />
 24-->[androidx.core:core:1.18.0] /Users/angetenar/.gradle/caches/9.7.1/transforms/4dec685ff254a31bc6d8a44d29e8c8b1/transformed/core-1.18.0/AndroidManifest.xml:24:9-44
 25
-26    <uses-permission android:name="com.salarybox.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+26    <uses-permission android:name="com.faceattend.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
 26-->[androidx.core:core:1.18.0] /Users/angetenar/.gradle/caches/9.7.1/transforms/4dec685ff254a31bc6d8a44d29e8c8b1/transformed/core-1.18.0/AndroidManifest.xml:26:5-97
 26-->[androidx.core:core:1.18.0] /Users/angetenar/.gradle/caches/9.7.1/transforms/4dec685ff254a31bc6d8a44d29e8c8b1/transformed/core-1.18.0/AndroidManifest.xml:26:22-94
 27    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -65,18 +65,18 @@
 37-->/Users/angetenar/Desktop/salary-box/app/src/main/AndroidManifest.xml:18:9-54
 38        android:supportsRtl="true"
 38-->/Users/angetenar/Desktop/salary-box/app/src/main/AndroidManifest.xml:19:9-35
-39        android:theme="@style/Theme.SalaryBox" >
-39-->/Users/angetenar/Desktop/salary-box/app/src/main/AndroidManifest.xml:20:9-47
+39        android:theme="@style/Theme.FaceAttend" >
+39-->/Users/angetenar/Desktop/salary-box/app/src/main/AndroidManifest.xml:20:9-48
 40        <activity
 40-->/Users/angetenar/Desktop/salary-box/app/src/main/AndroidManifest.xml:22:9-31:20
-41            android:name="com.salarybox.app.MainActivity"
+41            android:name="com.faceattend.app.MainActivity"
 41-->/Users/angetenar/Desktop/salary-box/app/src/main/AndroidManifest.xml:23:13-41
 42            android:exported="true"
 42-->/Users/angetenar/Desktop/salary-box/app/src/main/AndroidManifest.xml:24:13-36
 43            android:label="@string/app_name"
 43-->/Users/angetenar/Desktop/salary-box/app/src/main/AndroidManifest.xml:25:13-45
-44            android:theme="@style/Theme.SalaryBox" >
-44-->/Users/angetenar/Desktop/salary-box/app/src/main/AndroidManifest.xml:26:13-51
+44            android:theme="@style/Theme.FaceAttend" >
+44-->/Users/angetenar/Desktop/salary-box/app/src/main/AndroidManifest.xml:26:13-52
 45            <intent-filter>
 45-->/Users/angetenar/Desktop/salary-box/app/src/main/AndroidManifest.xml:27:13-30:29
 46                <action android:name="android.intent.action.MAIN" />
@@ -144,7 +144,7 @@
 79-->[com.google.mlkit:common:18.11.0] /Users/angetenar/.gradle/caches/9.7.1/transforms/d1197443c001e8b32a7138dc954b2bf6/transformed/common-18.11.0/AndroidManifest.xml:9:9-13:38
 80            android:name="com.google.mlkit.common.internal.MlKitInitProvider"
 80-->[com.google.mlkit:common:18.11.0] /Users/angetenar/.gradle/caches/9.7.1/transforms/d1197443c001e8b32a7138dc954b2bf6/transformed/common-18.11.0/AndroidManifest.xml:10:13-78
-81            android:authorities="com.salarybox.app.mlkitinitprovider"
+81            android:authorities="com.faceattend.app.mlkitinitprovider"
 81-->[com.google.mlkit:common:18.11.0] /Users/angetenar/.gradle/caches/9.7.1/transforms/d1197443c001e8b32a7138dc954b2bf6/transformed/common-18.11.0/AndroidManifest.xml:11:13-69
 82            android:exported="false"
 82-->[com.google.mlkit:common:18.11.0] /Users/angetenar/.gradle/caches/9.7.1/transforms/d1197443c001e8b32a7138dc954b2bf6/transformed/common-18.11.0/AndroidManifest.xml:12:13-37
@@ -180,7 +180,7 @@
 99-->[androidx.emoji2:emoji2:1.4.0] /Users/angetenar/.gradle/caches/9.7.1/transforms/c175ce614c7b698c9e2e719b618a7a7e/transformed/emoji2-1.4.0/AndroidManifest.xml:24:9-32:20
 100            android:name="androidx.startup.InitializationProvider"
 100-->[androidx.emoji2:emoji2:1.4.0] /Users/angetenar/.gradle/caches/9.7.1/transforms/c175ce614c7b698c9e2e719b618a7a7e/transformed/emoji2-1.4.0/AndroidManifest.xml:25:13-67
-101            android:authorities="com.salarybox.app.androidx-startup"
+101            android:authorities="com.faceattend.app.androidx-startup"
 101-->[androidx.emoji2:emoji2:1.4.0] /Users/angetenar/.gradle/caches/9.7.1/transforms/c175ce614c7b698c9e2e719b618a7a7e/transformed/emoji2-1.4.0/AndroidManifest.xml:26:13-68
 102            android:exported="false" >
 102-->[androidx.emoji2:emoji2:1.4.0] /Users/angetenar/.gradle/caches/9.7.1/transforms/c175ce614c7b698c9e2e719b618a7a7e/transformed/emoji2-1.4.0/AndroidManifest.xml:27:13-37

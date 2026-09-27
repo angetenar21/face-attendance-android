@@ -20,5 +20,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "SalaryBox"
+rootProject.name = "FaceAttend"
 include(":app")

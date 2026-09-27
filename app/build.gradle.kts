@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.salarybox.app"
+    namespace = "com.faceattend.app"
     compileSdk = 37
 
     defaultConfig {
-        applicationId = "com.salarybox.app"
+        applicationId = "com.faceattend.app"
         minSdk = 26
         targetSdk = 37
         versionCode = 1

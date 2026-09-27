@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="ic_launcher_background">#3F51B5</color>
-    <string name="app_name">SalaryBox</string>
-    <style name="Theme.SalaryBox" parent="android:Theme.Material.NoActionBar">
+    <string name="app_name">FaceAttend</string>
+    <style name="Theme.FaceAttend" parent="android:Theme.Material.NoActionBar">
         
         <item name="android:windowBackground">@android:color/black</item>
         

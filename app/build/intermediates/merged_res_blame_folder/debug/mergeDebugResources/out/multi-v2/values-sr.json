@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.salarybox.app-mergeDebugResources-59:/values-sr/values-sr.xml",
+            "outputFile": "com.faceattend.app-mergeDebugResources-59:/values-sr/values-sr.xml",
             "map": [
                 {
                     "source": "/Users/angetenar/.gradle/caches/9.7.1/transforms/4dec685ff254a31bc6d8a44d29e8c8b1/transformed/core-1.18.0/res/values-sr/values-sr.xml",

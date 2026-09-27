@@ -3,9 +3,9 @@
     <!--
         A base theme applied to the application. Used ONLY as the launch /
         splash theme before the Compose surface takes over.  Compose handles
-        all in-app theming via SalaryBoxTheme.
+        all in-app theming via FaceAttendTheme.
     -->
-    <style name="Theme.SalaryBox" parent="android:Theme.Material.NoActionBar">
+    <style name="Theme.FaceAttend" parent="android:Theme.Material.NoActionBar">
         <!-- The window background colour shown during cold start -->
         <item name="android:windowBackground">@android:color/black</item>
         <!-- Edge-to-edge: draw behind the status bar -->

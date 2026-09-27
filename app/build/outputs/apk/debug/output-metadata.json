@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.salarybox.app",
+  "applicationId": "com.faceattend.app",
   "variantName": "debug",
   "elements": [
     {

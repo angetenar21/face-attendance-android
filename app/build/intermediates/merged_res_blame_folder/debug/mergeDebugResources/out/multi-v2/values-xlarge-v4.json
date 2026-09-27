@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.salarybox.app-mergeDebugResources-59:/values-xlarge-v4/values-xlarge-v4.xml",
+            "outputFile": "com.faceattend.app-mergeDebugResources-59:/values-xlarge-v4/values-xlarge-v4.xml",
             "map": [
                 {
                     "source": "/Users/angetenar/.gradle/caches/9.7.1/transforms/227c590ca3cca543faedd80aa95e9974/transformed/appcompat-1.6.1/res/values-xlarge-v4/values-xlarge-v4.xml",
