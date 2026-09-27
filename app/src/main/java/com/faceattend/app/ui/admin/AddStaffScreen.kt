@@ -45,6 +45,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -81,9 +82,16 @@ fun AddStaffScreen(
     val focusManager = LocalFocusManager.current
     val employeeIdFocusRequester = remember { FocusRequester() }
 
+    val context = LocalContext.current
+
     // Consume the one-shot navigation event from the ViewModel Channel.
     LaunchedEffect(Unit) {
         viewModel.navigateBackEvent.collect {
+            android.widget.Toast.makeText(
+                context, 
+                "Staff added! Please tap their name to enroll a face.", 
+                android.widget.Toast.LENGTH_LONG
+            ).show()
             onNavigateBack()
         }
     }
